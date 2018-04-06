@@ -28,7 +28,8 @@ import android.util.Log
 import kotlinx.android.synthetic.main.activity_login_cas.*
 import org.jetbrains.anko.share
 import android.content.SharedPreferences
-
+import com.android.volley.toolbox.Volley
+import org.jetbrains.anko.toast
 
 
 /**
@@ -69,7 +70,6 @@ class LoginCASA : AppCompatActivity(), LoaderCallbacks<Cursor> {
         val password2 = pref.getString(PREF_PASSWORD, null)
         password.setText(password2)
         email.setText(username)
-
 
 
 
@@ -122,7 +122,7 @@ class LoginCASA : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
         // Store values at the time of the login attempt.
         val emailStr = email.text.toString()
-        val passwordStr = password.text.toString()
+        val passwordStr= password.text.toString()
 
         var cancel = false
         var focusView: View? = null
@@ -156,11 +156,7 @@ class LoginCASA : AppCompatActivity(), LoaderCallbacks<Cursor> {
 //            val sharedPref = this?.getSharedPreferences(getString(R.string.fileNAME), Context.MODE_PRIVATE)?: return
 //
 //            with (sharedPref.edit()) {
-//
-//
-//                putString(getString(R.string.email), emailStr)
-//                commit()
-//            }
+
             getSharedPreferences(PREFS_NAME,MODE_PRIVATE)
                     .edit()
                     .putString(PREF_USERNAME, emailStr)
@@ -168,11 +164,18 @@ class LoginCASA : AppCompatActivity(), LoaderCallbacks<Cursor> {
                     .commit();
             showProgress(true)
             mAuthTask = UserLoginTask(emailStr, passwordStr)
+//            authenticate(emailStr,passwordStr)
             mAuthTask!!.execute(null as Void?)
 
         }
     }
+    //post method
 
+    private fun authenticate(email: String, password: String){
+    toast("reeeee")
+
+
+    }
     private fun isEmailValid(email: String): Boolean {
         //TODO: Replace this with your own logic
         return email.contains("@")

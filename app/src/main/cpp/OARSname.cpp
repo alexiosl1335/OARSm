@@ -16,3 +16,12 @@ Java_com_q2i_q2iprov_MainActivity_stringz(
     return env->NewStringUTF(hello.c_str());
 }
 
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_q2i_q2iprov_DatahubCASA_DatahubCASA__(JNIEnv *env, jobject instance) {
+
+    // TODO
+
+
+    return env->NewStringUTF(returnValue);
+}
