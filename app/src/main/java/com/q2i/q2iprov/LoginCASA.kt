@@ -30,6 +30,7 @@ import org.jetbrains.anko.share
 import android.content.SharedPreferences
 import com.android.volley.toolbox.Volley
 import org.jetbrains.anko.toast
+import java.io.InterruptedIOException
 
 
 /**
@@ -44,7 +45,6 @@ class LoginCASA : AppCompatActivity(), LoaderCallbacks<Cursor> {
     val PREFS_NAME = "fileNAME"
     private val PREF_USERNAME = "username"
     private val PREF_PASSWORD = "password"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_cas)
@@ -162,10 +162,37 @@ class LoginCASA : AppCompatActivity(), LoaderCallbacks<Cursor> {
                     .putString(PREF_USERNAME, emailStr)
                     .putString(PREF_PASSWORD,passwordStr)
                     .commit();
-            showProgress(true)
-            mAuthTask = UserLoginTask(emailStr, passwordStr)
-//            authenticate(emailStr,passwordStr)
-            mAuthTask!!.execute(null as Void?)
+
+                mAuthTask = UserLoginTask(emailStr, passwordStr)
+                showProgress(true)
+                mAuthTask!!.execute(null as Void?)
+            var userString = "";
+//            var my_keys = emptySet<String>()
+//            var values = ArrayList<List<String>>()
+
+            val a = Thread{
+//                    (datainstance.authenticate(emailStr,passwordStr))
+//                my_keys = datainstance.authenticate(emailStr,passwordStr).keys
+//                values = datainstance.authenticate(emailStr,passwordStr).values as ArrayList<List<String>>
+//                    System.out.println("USER text"+datainstance.authenticate(emailStr,passwordStr))
+//                    userString = datainstance.user
+//                System.out.println("new"+userString)
+//                System.out.println("this ma stuff"+datainstance.stuff)
+                val intent = Intent(this,MainProviderViewCASA::class.java)
+
+                startActivity(intent)
+//                System.out.println("new keys "+my_keys)
+
+
+
+            }
+                a.start()
+                a.join()
+
+            System.out.println("yo")
+
+
+
 
         }
     }
@@ -314,13 +341,13 @@ class LoginCASA : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
     }
 
-    companion object {
+    companion object ree {
 
         /**
          * Id to identity READ_CONTACTS permission request.
          */
         private val REQUEST_READ_CONTACTS = 0
-
+        val datainstance = DatahubCASA()
         /**
          * A dummy authentication store containing known user names and passwords.
          * TODO: remove after connecting to a real authentication system.

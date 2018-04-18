@@ -1,7 +1,7 @@
 #include <jni.h>
 #include <string>
-
 using namespace std;
+
 class User{
 private:
     string email;
@@ -117,15 +117,11 @@ void User::setProvider(string a){
 
 
 static User current= User();
-extern "C" JNIEXPORT void JNICALL Java_com_q2i_q2iprov_DatahubCASA_CreateUser(JNIEnv *env, jobject /* this */ ,string my_name,string my_provider_id,string my_username, string my_lastname) {
-    User n = User(my_name,my_provider_id,my_username,my_lastname);
-    current =  n;
-}
 
-extern "C" JNIEXPORT void JNICALL Java_com_q2i_q2iprov_DatahubCASA_UpdateUser(JNIEnv *env, jobject) {
-
-
-}
+//extern "C" JNIEXPORT void JNICALL Java_com_q2i_q2iprov_DatahubCASA_UpdateUser(JNIEnv *env, jobject) {
+//
+//
+//}
 extern "C" JNIEXPORT jstring JNICALL Java_com_q2i_q2iprov_DatahubCASA_getName(JNIEnv *env, jobject){
 
     string a = current.getName();
@@ -161,11 +157,29 @@ extern "C" JNIEXPORT jstring JNICALL Java_com_q2i_q2iprov_DatahubCASA_getBirthda
     return env->NewStringUTF(a.c_str());
 
 }
-extern "C" JNIEXPORT jstring JNICALL Java_com_q2i_q2iprov_DatahubCASA_getProvider_id(JNIEnv *env, jobject ){
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_q2i_q2iprov_DatahubCASA_CreateUser(JNIEnv *env, jobject instance, jstring my_name_,
+                                            jstring my_provider_id_, jstring my_username_,
+       jstring my_lastname_) {
+        const char *my_name = env->GetStringUTFChars(my_name_, 0);
+        const char *my_provider_id = env->GetStringUTFChars(my_provider_id_, 0);
+        const char *my_username = env->GetStringUTFChars(my_username_, 0);
+        const char *my_lastname = env->GetStringUTFChars(my_lastname_, 0);
+        User n = User(my_name,my_provider_id,my_username,my_lastname);
+        current =  n;
 
+
+    env->ReleaseStringUTFChars(my_name_, my_name);
+    env->ReleaseStringUTFChars(my_provider_id_, my_provider_id);
+    env->ReleaseStringUTFChars(my_username_, my_username);
+    env->ReleaseStringUTFChars(my_lastname_, my_lastname);
+}extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_q2i_q2iprov_DatahubCASA_getProvider_1id(JNIEnv *env, jobject instance) {
+
+    // TODO
     string a =  current.getProvider();
     return env->NewStringUTF(a.c_str());
 
 }
-
-

@@ -9,10 +9,14 @@ import com.q2i.q2iprov.R.id.container
 
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
+import android.os.AsyncTask.execute
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         // Example of a call to a native method
 
@@ -23,6 +27,19 @@ class MainActivity : AppCompatActivity() {
             R.id.button2 -> {
 
                 val intent = Intent(this,LoginCASA::class.java)
+                startActivity(intent)
+            }
+
+            else -> {
+            }
+        }
+    }
+    fun click2(v: View?) {
+
+        when (v?.id) {
+            R.id.button1 -> {
+
+                val intent = Intent(this,LoginOARS::class.java)
                 startActivity(intent)
             }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#357EC7"
 >
 
 
@@ -15,6 +16,7 @@
         android:layout_marginEnd="86dp"
         android:layout_marginStart="91dp"
         android:layout_marginTop="52dp"
+        android:background="#357EC7"
         android:onClick="click"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/button1"
@@ -30,6 +32,8 @@
         android:layout_marginEnd="88dp"
         android:layout_marginStart="91dp"
         android:layout_marginTop="95dp"
+        android:background="#357EC7"
+        android:onClick="click2"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +52,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFF"/>
 
 </android.support.constraint.ConstraintLayout>

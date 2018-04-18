@@ -25,6 +25,7 @@ import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 
 import kotlinx.android.synthetic.main.activity_login_oars.*
 
@@ -36,7 +37,9 @@ class LoginOARS : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private var mAuthTask: UserLoginTask? = null
-
+    val PREFS_NAME = "fileNAME"
+    private val PREF_USERNAME = "username"
+    private val PREF_PASSWORD = "password"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_oars)
@@ -137,9 +140,17 @@ class LoginOARS : AppCompatActivity(), LoaderCallbacks<Cursor> {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            getSharedPreferences(PREFS_NAME,MODE_PRIVATE)
+                    .edit()
+                    .putString(PREF_USERNAME, emailStr)
+                    .putString(PREF_PASSWORD,passwordStr)
+                    .commit();
             showProgress(true)
             mAuthTask = UserLoginTask(emailStr, passwordStr)
             mAuthTask!!.execute(null as Void?)
+            val intent = Intent(this,MainProvActivityOArs::class.java)
+
+            startActivity(intent)
         }
     }
 
